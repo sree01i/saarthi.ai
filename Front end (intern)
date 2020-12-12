@@ -1,1 +1,5 @@
- 
+The firstpage(open window) would be the employee portal page
+in that page there is a employee button created.
+when we click that, it redirects to the page named "new".
+The new page is a new employee registrayion form
+it would take different emplyee details as input (mentioned in the assessment question).

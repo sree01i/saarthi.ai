@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<style> 
+#head{ 
+border-style: solid; 
+border-width: 3px; 
+border-color: #00cc00; 
+background:linear-gradient(to bottom right,#ccff66 0%,#ffff66 100%); 
+text-align: center; 
+color:blue;
+}
+body{
+font-family : Times New Roman; 
+} 
+</style> 
+</head> 
+<body bgcolor="pink"> 
+<div id="head"> 
+<h1>**SIGN UP REGISTRATION FORM**</h1> 
+</div> 
+<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>"> <center><br> 
+<table> 
+<tr> 
+<td>Name :</td> 
+<td><input type="text" name="name" placeholder="FullName" required></td> </tr> 
+<tr> 
+<td>Employee Id :</td> 
+<td><input type="text" name="id" placeholder="Employee Id" required></td>
+</tr>
+<tr> 
+<td><label for="dept">Department :</label></td>
+<td>
+<select name="dept" id="dept">
+	<option>Select</option>
+    <option>CSE</option>
+    <option>ECE</option>
+    <option>MECH</option>
+    <option>Civil</option>
+	<option>Chemical</option>
+  </select> 
+  </td>
+</tr> 
+<tr> 
+<td>E-Mail Id :</td> 
+<td><input type="text" name="mail" placeholder="xyz@gmail.com" required></td> </tr>  
+<tr>
+<td>
+<label for="date">Date Of Joining (DOJ) :</label></td>
+  <td><input type="date" id="doj" name="doj"></td>
+</tr>
+
+
+<tr> 
+<td><input type="submit" name="submit", value="Submit"></td>  
+<td><input type="reset" value="X"></td> 
+</tr>
+</table> 
+</center> 
+</form> 
+<?php 
+$hostname="localhost"; 
+$username="root"; 
+$password=""; 
+$dbname="employee"; 
+if(isset($_POST['submit'])){ 
+$con=mysqli_connect($hostname,$username,$password,$dbname); if(!$con) 
+die("connection failed".mysqli_connect_error()); 
+$a=$_POST['name']; 
+$b=$_POST['id']; 
+$c=$_POST['dept']; 
+$d=$_POST['mail']; 
+$e=$_POST['doj'];
+$sql="INSERT INTO data  
+(Name,EmployeeId,Department,E-Mail,DateofJoining)  VALUES('$a',' $b','$c','$d','$e')"; 
+
+$sql="SELECT * FROM data"; 
+$result=mysqli_query($con,$sql); 
+if(mysqli_num_rows($result)>0){
+echo "<tr><th align='center'>Name</th>
+<th align='center'>EmployeeId</th>
+<th  align='center'>Department</th>
+<th align='center'>E-Mail</th>
+<th align='center'>DateofJoining</th></tr>"; 
+while($row=mysqli_fetch_assoc($result)){ 
+echo "<tr><td align='center'>".$row['Name']."</td>
+<td>align='center'>".$row['EmployeeId']."</td>
+<td align='center'>".$row['Department']."</td>
+<td  align='center'>".$row['E-Mail']."</td>
+<td align='center'>".$row['DateofJoining']."</td></tr>"; 
+} 
+echo ""; 
+} 
+?> 
+
+if(mysqli_query($con,$sql)) 
+echo "new record inserted successfully"; 
+} 
+?> 
+
+</body>
+</html>
